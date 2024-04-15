@@ -7,9 +7,18 @@ import Footer from '../../atoms/Footer';
 import { Wrapper, ButtonWrapper } from './styled';
 
 const DefaultTemplate = ({ children }) => {
-  const [isButtonVisible, setIsButtonvisible] = useState(false);
+  const [isButtonVisible, setIsButtonVisible] = useState(false);
+    const handleButtonVisibility = () => {
+        window.scrollY > 0 ? setIsButtonVisible(true) : setIsButtonVisible(false);
+    }
+
+    useEffect(() => {
+        document.addEventListener('scroll', handleButtonVisibility);
+        return () => document.removeEventListener('scroll', handleButtonVisibility);
+    }, []);
 
   const scrollToTop = () => {
+      window.scrollTo(0, 0);
   };
 
   return (
